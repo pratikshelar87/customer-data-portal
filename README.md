@@ -7,7 +7,7 @@ A full-stack customer data explorer built with **Next.js (SSR)** and **AWS Lambd
 ## 🌐 Live Demo
 
 **The working application is** deployed on Vercel:  
-🔗 [https://customer-data-portal-26msfr87k-pratik-shelars-projects.vercel.app/](https://customer-data-portal-26msfr87k-pratik-shelars-projects.vercel.app/)
+🔗 [https://customer-data-portal.vercel.app/](https://customer-data-portal.vercel.app/)
 
 
 
