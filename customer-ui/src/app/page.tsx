@@ -2,12 +2,14 @@ import { fetchCustomers } from "@/lib/api";
 import { CustomerTable } from "@/components/customer-table";
 import { PaginationControls } from "@/components/pagination-controls";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams?: { page?: string };
-}) {
-  const page = parseInt(searchParams?.page || "1", 10);
+type Props = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
+
+export default async function Page({ searchParams }: Props) {
+  const params = await searchParams;
+  const page = parseInt(typeof params.page === "string" ? params.page : "1", 10);
+
   const { customers, totalPages } = await fetchCustomers(page, 10);
 
   return (
@@ -18,3 +20,6 @@ export default async function Page({
     </main>
   );
 }
+
+
+
