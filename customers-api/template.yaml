@@ -1,0 +1,68 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Customer Data Explorer - Backend with API Key Auth
+
+Globals:
+  Function:
+    Timeout: 10
+    MemorySize: 256
+    Runtime: nodejs22.x
+    Architectures: [x86_64]
+
+Resources:
+  CustomerApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/get-customers.handler
+      CodeUri: .
+      Events:
+        CustomerApi:
+          Type: Api
+          Properties:
+            Path: /customers
+            Method: get
+            RestApiId: !Ref CustomerApi
+            Auth:
+              ApiKeyRequired: true
+            
+
+  CustomerApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: customer-api
+      StageName: prod
+      EndpointConfiguration: REGIONAL
+      ApiKeySourceType: HEADER
+      Cors:
+        AllowMethods: "'OPTIONS,GET'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+        AllowOrigin: "'*'"  
+
+  CustomerApiKey:
+    Type: AWS::ApiGateway::ApiKey
+    Properties:
+      Name: customer-api-key
+      Enabled: true
+      StageKeys:
+        - RestApiId: !Ref CustomerApi
+          StageName: !Ref CustomerApi.Stage
+
+  CustomerUsagePlan:
+    Type: AWS::ApiGateway::UsagePlan
+    DependsOn: CustomerApi
+    Properties:
+      UsagePlanName: CustomerApiUsagePlan
+      ApiStages:
+        - ApiId: !Ref CustomerApi
+          Stage: !Ref CustomerApi.Stage
+      Throttle:
+        RateLimit: 10
+        BurstLimit: 2
+
+
+  CustomerUsagePlanKey:
+    Type: AWS::ApiGateway::UsagePlanKey
+    Properties:
+      KeyId: !Ref CustomerApiKey
+      KeyType: API_KEY
+      UsagePlanId: !Ref CustomerUsagePlan

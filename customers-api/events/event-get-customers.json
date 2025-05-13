@@ -1,0 +1,17 @@
+{
+    "resource": "/customers",
+    "path": "/customers",
+    "httpMethod": "GET",
+    "queryStringParameters": {
+      "page": "2",
+      "limit": "5"
+    },
+    "headers": {},
+    "multiValueHeaders": {},
+    "requestContext": {
+      "httpMethod": "GET",
+      "resourcePath": "/customers"
+    },
+    "body": null,
+    "isBase64Encoded": false
+}
