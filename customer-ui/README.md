@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Customer UI
 
-## Getting Started
+This is the frontend for the **Customer Data Portal**, built using:
 
-First, run the development server:
+- **Next.js 15 (App Router + SSR)**
+- **Tailwind CSS**
+- **shadcn/ui** (accessible UI components)
+- **Deployed via Vercel**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+## 🌐 Live Demo
+
+🔗 [https://customer-data-portal.vercel.app/](https://customer-data-portal.vercel.app/)
+
+
+
+## 🔧 Getting Started
+
+1. Install dependencies
+
+```
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Set up environment variables
+Create a .env.local file:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+API_KEY=your-api-key-here
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Start the dev server
+```
+npm run dev
+```
 
-## Learn More
+App will be available at:
+📍 http://localhost:3000
 
-To learn more about Next.js, take a look at the following resources:
+📦 API Integration
+The UI fetches customer data from a secured AWS API Gateway endpoint:
+```
+GET https://qhxx3y3229.execute-api.ap-southeast-2.amazonaws.com/prod/customers?page=1&limit=10
+API requests require an x-api-key header with the valid key.
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ✅ Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Server-side pagination with ?page=1 query param
 
-## Deploy on Vercel
+Clean UI with accessible shadcn components
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Vercel auto-deploy from GitHub main branch
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+📁 Folder Structure
+```
+customer-ui/
+├── app/                # App Router pages
+├── components/         # Shared UI components
+├── lib/                # API fetch helpers
+├── types/              # TypeScript types
+├── public/             # Static assets
+└── .env.local          # API key (not committed)
+```
+
+🧪 Testing
+No test framework added yet.
+You can add unit tests using Vitest or Jest for components and API helpers.

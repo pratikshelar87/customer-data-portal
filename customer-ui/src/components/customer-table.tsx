@@ -6,20 +6,12 @@ import {
   TableHead,
   TableCell,
 } from "@/components/ui/table";
-
-import { Card } from "@/components/ui/card";
 import { Customer } from "@/types/customer";
 
-
-
-export function CustomerTable({ 
-  customers
-}: { 
-  customers: Customer[]
-}) {
+export function CustomerTable({ customers }: { customers: Customer[] }) {
   return (
-    <Card className="border rounded-lg overflow-x-auto">
-      <Table className="min-w-full">
+    <div className="w-full overflow-x-auto rounded-lg border">
+      <Table className="min-w-[600px] text-sm">
         <TableHeader>
           <TableRow>
             <TableHead>ID</TableHead>
@@ -30,7 +22,7 @@ export function CustomerTable({
         </TableHeader>
         <TableBody>
           {customers.map((c) => (
-            <TableRow key={c.id} className="border-b">
+            <TableRow key={c.id}>
               <TableCell>{c.id}</TableCell>
               <TableCell>{c.fullName}</TableCell>
               <TableCell>{c.email}</TableCell>
@@ -39,6 +31,6 @@ export function CustomerTable({
           ))}
         </TableBody>
       </Table>
-    </Card>
+    </div>
   );
 }
