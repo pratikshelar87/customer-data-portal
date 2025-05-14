@@ -1,14 +1,19 @@
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import { PaginationControls } from "../pagination-controls";
-import { vi } from "vitest";
-import { useRouter } from "next/navigation";
 
+import { render, screen } from "@testing-library/react";
+import { PaginationControls } from "../pagination-controls";
+import React from "react";
+
+import { vi } from "vitest";
+
+// ✅ mock both useRouter and useSearchParams
 vi.mock("next/navigation", () => ({
   useRouter: () => ({
     push: vi.fn(),
   }),
-  useSearchParams: () => new URLSearchParams("page=1"),
+  useSearchParams: () =>
+    new URLSearchParams({
+      page: "1",
+    }),
 }));
 
 

@@ -14,14 +14,14 @@ describe("fetchCustomers", () => {
       totalPages: 3,
     };
 
-    (fetch as any).mockResolvedValueOnce({
+    (global.fetch as vi.Mock).mockResolvedValueOnce({
       ok: true,
       json: async () => mockResponse,
     });
 
     const result = await fetchCustomers(1, 10);
 
-    expect(fetch).toHaveBeenCalledWith(
+    expect(global.fetch).toHaveBeenCalledWith(
       "https://qhxx3y3229.execute-api.ap-southeast-2.amazonaws.com/prod/customers?page=1&limit=10",
       expect.objectContaining({
         headers: expect.objectContaining({
@@ -35,8 +35,9 @@ describe("fetchCustomers", () => {
   });
 
   it("throws if fetch fails", async () => {
-    (fetch as any).mockResolvedValueOnce({ ok: false });
+    (global.fetch as vi.Mock).mockResolvedValueOnce({ ok: false });
 
     await expect(fetchCustomers(1, 10)).rejects.toThrow("Failed to fetch customers");
   });
 });
+

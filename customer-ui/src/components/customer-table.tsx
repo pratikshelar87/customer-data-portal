@@ -7,6 +7,7 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import { Customer } from "@/types/customer";
+import React from "react";
 
 export function CustomerTable({ customers }: { customers: Customer[] }) {
   return (
