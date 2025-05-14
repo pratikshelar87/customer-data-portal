@@ -64,5 +64,6 @@ customer-ui/
 ```
 
 🧪 Testing
-No test framework added yet.
-You can add unit tests using Vitest or Jest for components and API helpers.
+```
+npm run test
+```

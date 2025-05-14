@@ -9,6 +9,6 @@ export async function fetchCustomers(page = 1, limit = 10) {
     }
   );
 
-  if (!res.ok) throw new Error("Failed to fetch");
+  if (!res.ok) throw new Error("Failed to fetch customers");
   return res.json();
 }

@@ -3,13 +3,13 @@
     "version": "1.0.0",
     "type": "commonjs",
     "scripts": {
-      "test": "jest"
+        "test": "jest"
     },
     "devDependencies": {
-      "jest": "^29.0.0"
+        "@types/node": "^22.15.17",
+        "jest": "^29.0.0"
     },
     "engines": {
         "node": "22.x"
     }
 }
-

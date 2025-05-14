@@ -7,8 +7,24 @@ const customers = JSON.parse(
 );
 
 exports.handler = async (event) => {
-  const page = parseInt(event.queryStringParameters?.page || "1");
-  const limit = parseInt(event.queryStringParameters?.limit || "10");
+  const pageStr = event.queryStringParameters?.page || "1";
+  const limitStr = event.queryStringParameters?.limit || "10";
+
+  const page = parseInt(pageStr, 10);
+  const limit = parseInt(limitStr, 10);
+
+  // Validate page and limit
+  if (
+    isNaN(page) || page <= 0 ||
+    isNaN(limit) || limit <= 0
+  ) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({
+        message: "Invalid query parameters. 'page' and 'limit' must be positive integers.",
+      }),
+    };
+  }
 
   const { data, totalPages } = paginate(customers, page, limit);
 
